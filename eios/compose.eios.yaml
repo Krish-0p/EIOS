@@ -110,10 +110,13 @@ services:
       # Browser-facing, for the per-service trace links.
       - JAEGER_UI_URL=http://127.0.0.1:8080/jaeger/ui
       - EIOS_HEALTH_WINDOW=5m
+      - EIOS_WORKSPACE_ROOT=/workspace/eios
     volumes:
       # Read-write: the orchestrator flips flags to inject faults, so a fault
       # window and the flag that caused it are recorded in one action.
       - ../opentelemetry-demo/src/flagd:/etc/flagd
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ../eios:/workspace/eios:ro
     ports:
       - "8000:8000"
     depends_on:

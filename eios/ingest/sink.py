@@ -17,6 +17,11 @@ from confluent_kafka import Producer
 import config
 from schemas import NormalizedEvent
 
+try:
+    from security.redactor import redact_event as _redact_event
+except ImportError:
+    def _redact_event(e): return e  # graceful fallback if security module missing
+
 log = logging.getLogger("eios.sink")
 
 _INSERT = """
@@ -40,28 +45,31 @@ class Sink:
         self._conn = psycopg.connect(config.POSTGRES_DSN, autocommit=True)
 
     def emit(self, event: NormalizedEvent) -> None:
-        payload = event.model_dump_json()
+        safe = _redact_event(event)
+        if safe.attributes != event.attributes:
+            log.warning("PII redacted from event %s", event.event_id)
+        payload = safe.model_dump_json()
         self._producer.produce(
             config.EVENTS_TOPIC,
-            key=event.entity.key().encode(),
+            key=safe.entity.key().encode(),
             value=payload.encode(),
         )
         self._producer.poll(0)
 
         row = {
-            "event_id": str(event.event_id),
-            "schema_version": event.schema_version,
-            "domain": event.domain.value,
-            "source": event.source,
-            "observed_at": event.observed_at,
-            "ingested_at": event.ingested_at,
-            "entity_kind": event.entity.kind.value,
-            "entity_id": event.entity.id,
-            "entity_service": event.entity.service,
-            "metrics": json.dumps(event.metrics),
-            "attributes": json.dumps(event.attributes),
-            "trace_id": event.trace_id,
-            "raw_ref": event.raw_ref,
+            "event_id": str(safe.event_id),
+            "schema_version": safe.schema_version,
+            "domain": safe.domain.value,
+            "source": safe.source,
+            "observed_at": safe.observed_at,
+            "ingested_at": safe.ingested_at,
+            "entity_kind": safe.entity.kind.value,
+            "entity_id": safe.entity.id,
+            "entity_service": safe.entity.service,
+            "metrics": json.dumps(safe.metrics),
+            "attributes": json.dumps(safe.attributes),
+            "trace_id": safe.trace_id,
+            "raw_ref": safe.raw_ref,
         }
         try:
             with self._lock, self._conn.cursor() as cur:

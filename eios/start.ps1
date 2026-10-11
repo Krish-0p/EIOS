@@ -55,12 +55,14 @@ function Wait-For {
 Write-Host "`n[1/5] Docker" -ForegroundColor Cyan
 docker info *>$null
 if ($LASTEXITCODE -ne 0) {
-    $exe = "C:\Program Files\Docker\Docker\Docker Desktop.exe"
-    if (Test-Path $exe) {
-        Write-Host "  starting Docker Desktop"
+    $userExe = "$env:LOCALAPPDATA\Programs\DockerDesktop\Docker Desktop.exe"
+    $progExe = "C:\Program Files\Docker\Docker\Docker Desktop.exe"
+    $exe = if (Test-Path $userExe) { $userExe } elseif (Test-Path $progExe) { $progExe } else { $null }
+    if ($exe) {
+        Write-Host "  starting Docker Desktop ($exe)"
         Start-Process $exe
     } else {
-        Write-Error "Docker is not running and Docker Desktop was not found at $exe"
+        Write-Error "Docker is not running and Docker Desktop was not found at $userExe or $progExe"
     }
     if (-not (Wait-For "docker daemon" { docker info *>$null; $LASTEXITCODE -eq 0 } 420)) {
         Write-Error "Docker daemon did not come up."
