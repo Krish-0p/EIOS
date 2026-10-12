@@ -42,6 +42,10 @@ def main() -> None:
 
     try:
         while not stop.is_set():
+            try:
+                sink.publish_pending()
+            except Exception:
+                log.exception("event delivery unavailable; persisted outbox will retry")
             stop.wait(1.0)
     finally:
         stop.set()

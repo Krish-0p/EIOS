@@ -43,12 +43,12 @@ export function OSHeader({
   }, []);
 
   return (
-    <header className="relative z-30 flex h-10 w-full items-center justify-between border-b border-[#0d2e49] bg-[#010814] px-4 select-none">
+    <header className="relative z-30 flex h-10 w-full items-center justify-between border-b border-[rgb(var(--eios-0d2e49))] bg-[rgb(var(--eios-010814))] pl-4 pr-14 select-none">
       {/* Brand & Kernel identity */}
       <div className="flex items-center gap-3">
         {/* Solid EIOS Hex Logo (Zero glow) */}
-        <div className="flex h-6 w-6 items-center justify-center rounded-md bg-[#02243d] border border-[#26658C]">
-          <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[#54ACBF]" fill="currentColor">
+        <div className="flex h-6 w-6 items-center justify-center rounded-md bg-[rgb(var(--eios-02243d))] border border-[rgb(var(--eios-26658c))]">
+          <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-[rgb(var(--eios-54acbf))]" fill="currentColor">
             <polygon
               points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5"
               fill="none"
@@ -60,13 +60,13 @@ export function OSHeader({
         </div>
 
         <div className="flex items-baseline gap-2">
-          <span className="font-display text-sm font-bold tracking-wider text-white">
+          <span className="font-display text-sm font-bold tracking-wider text-[rgb(var(--eios-text-white))]">
             EIOS
           </span>
-          <span className="hidden text-xs font-medium text-slate-300 sm:inline">
+          <span className="hidden text-xs font-medium text-[rgb(var(--eios-text-slate-300))] sm:inline">
             Enterprise Intelligent Operating System
           </span>
-          <span className="hidden text-[10px] font-mono text-[#54ACBF] md:inline">
+          <span className="hidden text-[10px] font-mono text-[rgb(var(--eios-54acbf))] md:inline">
             v1.0.0 | Kernel 1.0.0-enterprise
           </span>
         </div>
@@ -79,62 +79,62 @@ export function OSHeader({
           title="Click to toggle Eco RAM Saver mode (keeps PC responsive and cool)"
           className={`flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[11px] font-medium transition-colors ${
             ecoMode
-              ? "border-[#1C5147] bg-[#0B302C] text-[#B5E3C8]"
-              : "border-[#26658C] bg-[#02243d] text-[#A7EBF2]"
+              ? "border-[rgb(var(--eios-1c5147))] bg-[rgb(var(--eios-0b302c))] text-[rgb(var(--eios-b5e3c8))]"
+              : "border-[rgb(var(--eios-26658c))] bg-[rgb(var(--eios-02243d))] text-[rgb(var(--eios-a7ebf2))]"
           }`}
         >
-          <Zap className={`h-3 w-3 ${ecoMode ? "fill-[#B5E3C8] text-[#B5E3C8]" : "text-[#54ACBF]"}`} />
+          <Zap className={`h-3 w-3 ${ecoMode ? "fill-[rgb(var(--eios-b5e3c8))] text-[rgb(var(--eios-b5e3c8))]" : "text-[rgb(var(--eios-54acbf))]"}`} />
           <span>{ecoMode ? "RAM Saver: Active (3.8GB Cap)" : "Eco Mode: Available"}</span>
         </button>
 
-        <div className="flex items-center gap-1.5 rounded-full border border-[#1C5147] bg-[#051F1C] px-2.5 py-0.5 text-[11px] text-[#D1F7DE]">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#6EAA90]" />
+        <div className="flex items-center gap-1.5 rounded-full border border-[rgb(var(--eios-1c5147))] bg-[rgb(var(--eios-051f1c))] px-2.5 py-0.5 text-[11px] text-[rgb(var(--eios-d1f7de))]">
+          <span className="h-1.5 w-1.5 rounded-full bg-[rgb(var(--eios-6eaa90))]" />
           <span>Health: {systemHealth}%</span>
         </div>
 
         <button
           onClick={onOpenSecurity}
           title="Open EIOS Zero-Trust Security Center (Rehan Module)"
-          className="flex items-center gap-1.5 rounded-full border border-[#26658C] bg-[#02243d] px-2.5 py-0.5 text-[11px] text-[#A7EBF2] hover:bg-[#033457] hover:border-[#54ACBF] transition-colors"
+          className="flex items-center gap-1.5 rounded-full border border-[rgb(var(--eios-26658c))] bg-[rgb(var(--eios-02243d))] px-2.5 py-0.5 text-[11px] text-[rgb(var(--eios-a7ebf2))] hover:bg-[rgb(var(--eios-033457))] hover:border-[rgb(var(--eios-54acbf))] transition-colors"
         >
-          <ShieldCheck className="h-3 w-3 text-[#54ACBF]" />
+          <ShieldCheck className="h-3 w-3 text-[rgb(var(--eios-54acbf))]" />
           <span>Zero-Trust: Enforced</span>
         </button>
 
         <button
           onClick={onOpenOnboarding}
           title="Click to view discovered containers and OTel pipeline"
-          className="flex items-center gap-1.5 rounded-full border border-[#26658C] bg-[#02243d] px-2.5 py-0.5 text-[11px] text-[#A7EBF2] hover:bg-[#033457] hover:border-[#54ACBF] transition-colors"
+          className="flex items-center gap-1.5 rounded-full border border-[rgb(var(--eios-26658c))] bg-[rgb(var(--eios-02243d))] px-2.5 py-0.5 text-[11px] text-[rgb(var(--eios-a7ebf2))] hover:bg-[rgb(var(--eios-033457))] hover:border-[rgb(var(--eios-54acbf))] transition-colors"
         >
-          <Box className="h-3 w-3 text-[#54ACBF]" />
+          <Box className="h-3 w-3 text-[rgb(var(--eios-54acbf))]" />
           <span>Workload: Online Boutique (34 Pods)</span>
         </button>
       </div>
 
       {/* Right System Indicators & Clock */}
-      <div className="flex items-center gap-3 text-slate-300">
-        <div className="flex items-center gap-2.5 pr-2 border-r border-[#0d2e49]">
+      <div className="flex items-center gap-3 text-[rgb(var(--eios-text-slate-300))]">
+        <div className="flex items-center gap-2.5 pr-2 border-r border-[rgb(var(--eios-0d2e49))]">
           <span title="Cloud Sync: Connected">
-            <Cloud className="h-3.5 w-3.5 text-[#54ACBF] hover:text-[#A7EBF2] cursor-pointer" />
+            <Cloud className="h-3.5 w-3.5 text-[rgb(var(--eios-54acbf))] hover:text-[rgb(var(--eios-a7ebf2))] cursor-pointer" />
           </span>
           <span title="Enterprise Mesh: 5 GHz">
-            <Wifi className="h-3.5 w-3.5 text-slate-300 hover:text-white cursor-pointer" />
+            <Wifi className="h-3.5 w-3.5 text-[rgb(var(--eios-text-slate-300))] hover:text-[rgb(var(--eios-text-white))] cursor-pointer" />
           </span>
           <span title="Volume: 80%">
-            <Volume2 className="h-3.5 w-3.5 text-slate-300 hover:text-white cursor-pointer" />
+            <Volume2 className="h-3.5 w-3.5 text-[rgb(var(--eios-text-slate-300))] hover:text-[rgb(var(--eios-text-white))] cursor-pointer" />
           </span>
-          <div className="flex items-center gap-1 text-[11px] text-[#B5E3C8]">
-            <Battery className="h-3.5 w-3.5 text-[#6EAA90]" />
+          <div className="flex items-center gap-1 text-[11px] text-[rgb(var(--eios-b5e3c8))]">
+            <Battery className="h-3.5 w-3.5 text-[rgb(var(--eios-6eaa90))]" />
             <span className="font-mono text-[10px]">100%</span>
           </div>
         </div>
 
         {/* Live Clock & Date */}
         <div className="flex flex-col items-end leading-none">
-          <span className="font-mono text-xs font-semibold text-slate-200">
+          <span className="font-mono text-xs font-semibold text-[rgb(var(--eios-text-slate-200))]">
             {timeStr}
           </span>
-          <span className="text-[9px] text-[#54ACBF] tracking-wider font-mono">
+          <span className="text-[9px] text-[rgb(var(--eios-54acbf))] tracking-wider font-mono">
             {dateStr}
           </span>
         </div>

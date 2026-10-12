@@ -442,13 +442,13 @@ export function FileSystemWindow({
       }`}
     >
       {/* 1. Window Header (User Palette: #021424, #0d2e49) */}
-      <div className="flex h-8 items-center justify-between border-b border-[#0d2e49] bg-[#021424] px-3">
+      <div className="flex h-8 items-center justify-between border-b border-[rgb(var(--eios-0d2e49))] bg-[rgb(var(--eios-021424))] px-3">
         <div className="flex items-center gap-2">
-          <span className="text-[#54ACBF] text-xs">📁</span>
-          <span className="font-display text-xs font-semibold text-slate-200">
+          <span className="text-[rgb(var(--eios-54acbf))] text-xs">📁</span>
+          <span className="font-display text-xs font-semibold text-[rgb(var(--eios-text-slate-200))]">
             File System
           </span>
-          <span className="text-[10px] text-[#54ACBF] font-mono hidden sm:inline">
+          <span className="text-[10px] text-[rgb(var(--eios-54acbf))] font-mono hidden sm:inline">
             eios://enterprise/{currentPath}/
           </span>
         </div>
@@ -456,21 +456,21 @@ export function FileSystemWindow({
         <div className="flex items-center gap-1.5">
           <button
             onClick={onMinimize}
-            className="flex h-5 w-5 items-center justify-center rounded hover:bg-[#023859] text-slate-400 hover:text-white"
+            className="flex h-5 w-5 items-center justify-center rounded hover:bg-[rgb(var(--eios-023859))] text-[rgb(var(--eios-text-slate-400))] hover:text-[rgb(var(--eios-text-white))]"
             title="Minimize"
           >
             <Minus className="h-3 w-3" />
           </button>
           <button
             onClick={onToggleMaximize}
-            className="flex h-5 w-5 items-center justify-center rounded hover:bg-[#023859] text-slate-400 hover:text-white"
+            className="flex h-5 w-5 items-center justify-center rounded hover:bg-[rgb(var(--eios-023859))] text-[rgb(var(--eios-text-slate-400))] hover:text-[rgb(var(--eios-text-white))]"
             title={isMaximized ? "Restore" : "Maximize"}
           >
             <Square className="h-2.5 w-2.5" />
           </button>
           <button
             onClick={onClose}
-            className="flex h-5 w-5 items-center justify-center rounded hover:bg-[#E04A5F] text-slate-400 hover:text-white"
+            className="flex h-5 w-5 items-center justify-center rounded hover:bg-[rgb(var(--eios-e04a5f))] text-[rgb(var(--eios-text-slate-400))] hover:text-[rgb(var(--eios-text-white))]"
             title="Close"
           >
             <X className="h-3 w-3" />
@@ -479,43 +479,43 @@ export function FileSystemWindow({
       </div>
 
       {/* 2. Navigation & Breadcrumbs Bar */}
-      <div className="flex h-9 items-center gap-2 border-b border-[#0d2e49] bg-[#010e1c] px-3">
-        <div className="flex items-center gap-0.5 text-slate-300">
+      <div className="flex h-9 items-center gap-2 border-b border-[rgb(var(--eios-0d2e49))] bg-[rgb(var(--eios-010e1c))] px-3">
+        <div className="flex items-center gap-0.5 text-[rgb(var(--eios-text-slate-300))]">
           <button
             onClick={handleBack}
             disabled={historyIdx === 0}
-            className="rounded p-1 hover:bg-[#023859] disabled:opacity-25"
+            className="rounded p-1 hover:bg-[rgb(var(--eios-023859))] disabled:opacity-25"
             title="Back"
           >
-            <ArrowLeft className="h-3.5 w-3.5 text-[#54ACBF]" />
+            <ArrowLeft className="h-3.5 w-3.5 text-[rgb(var(--eios-54acbf))]" />
           </button>
           <button
             onClick={handleForward}
             disabled={historyIdx >= history.length - 1}
-            className="rounded p-1 hover:bg-[#023859] disabled:opacity-25"
+            className="rounded p-1 hover:bg-[rgb(var(--eios-023859))] disabled:opacity-25"
             title="Forward"
           >
-            <ArrowRight className="h-3.5 w-3.5 text-[#54ACBF]" />
+            <ArrowRight className="h-3.5 w-3.5 text-[rgb(var(--eios-54acbf))]" />
           </button>
           <button
             onClick={() => setSearchQuery("")}
-            className="rounded p-1 hover:bg-[#023859]"
+            className="rounded p-1 hover:bg-[rgb(var(--eios-023859))]"
             title="Refresh"
           >
-            <RotateCw className="h-3.5 w-3.5 text-[#54ACBF]" />
+            <RotateCw className="h-3.5 w-3.5 text-[rgb(var(--eios-54acbf))]" />
           </button>
         </div>
 
         {/* Dynamic Breadcrumbs Bar */}
-        <div className="flex flex-1 items-center gap-1 overflow-x-auto rounded border border-[#0d2e49] bg-[#021424] px-2.5 py-1 text-xs font-mono text-slate-300 scrollbar-themed">
-          <span className="text-[#54ACBF] text-[11px] shrink-0">📁</span>
+        <div className="flex flex-1 items-center gap-1 overflow-x-auto rounded border border-[rgb(var(--eios-0d2e49))] bg-[rgb(var(--eios-021424))] px-2.5 py-1 text-xs font-mono text-[rgb(var(--eios-text-slate-300))] scrollbar-themed">
+          <span className="text-[rgb(var(--eios-54acbf))] text-[11px] shrink-0">📁</span>
           <button
             onClick={() => navigateTo("home")}
-            className="hover:text-white text-[#54ACBF]"
+            className="hover:text-[rgb(var(--eios-text-white))] text-[rgb(var(--eios-54acbf))]"
           >
             eios:
           </button>
-          <span className="text-slate-500">/</span>
+          <span className="text-[rgb(var(--eios-text-slate-500))]">/</span>
           {currentPath.split("/").map((segment, idx, arr) => {
             const isLast = idx === arr.length - 1;
             const subPath = arr.slice(0, idx + 1).join("/");
@@ -523,13 +523,13 @@ export function FileSystemWindow({
               <span key={subPath} className="flex items-center gap-1 shrink-0">
                 <button
                   onClick={() => navigateTo(subPath)}
-                  className={`hover:text-[#A7EBF2] transition-colors ${
-                    isLast ? "text-[#A7EBF2] font-bold" : "text-[#54ACBF]"
+                  className={`hover:text-[rgb(var(--eios-a7ebf2))] transition-colors ${
+                    isLast ? "text-[rgb(var(--eios-a7ebf2))] font-bold" : "text-[rgb(var(--eios-54acbf))]"
                   }`}
                 >
                   {segment}
                 </button>
-                {!isLast && <span className="text-slate-500">/</span>}
+                {!isLast && <span className="text-[rgb(var(--eios-text-slate-500))]">/</span>}
               </span>
             );
           })}
@@ -537,22 +537,22 @@ export function FileSystemWindow({
 
         {/* Search */}
         <div className="relative flex w-36 items-center">
-          <Search className="absolute left-2 h-3 w-3 text-[#54ACBF]" />
+          <Search className="absolute left-2 h-3 w-3 text-[rgb(var(--eios-54acbf))]" />
           <input
             type="text"
             placeholder="Search files..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="h-6 w-full rounded border border-[#0d2e49] bg-[#021424] pl-6 pr-2 text-xs text-slate-200 placeholder-slate-500 outline-none focus:border-[#54ACBF]"
+            className="h-6 w-full rounded border border-[rgb(var(--eios-0d2e49))] bg-[rgb(var(--eios-021424))] pl-6 pr-2 text-xs text-[rgb(var(--eios-text-slate-200))] placeholder-slate-500 outline-none focus:border-[rgb(var(--eios-54acbf))]"
           />
         </div>
 
         {/* View Switchers */}
-        <div className="flex items-center gap-0.5 border-l border-[#0d2e49] pl-2 text-slate-400">
+        <div className="flex items-center gap-0.5 border-l border-[rgb(var(--eios-0d2e49))] pl-2 text-[rgb(var(--eios-text-slate-400))]">
           <button
             onClick={() => setViewMode("grid")}
-            className={`rounded p-1 hover:text-white ${
-              viewMode === "grid" ? "bg-[#023859] text-[#A7EBF2]" : ""
+            className={`rounded p-1 hover:text-[rgb(var(--eios-text-white))] ${
+              viewMode === "grid" ? "bg-[rgb(var(--eios-023859))] text-[rgb(var(--eios-a7ebf2))]" : ""
             }`}
             title="Grid view"
           >
@@ -560,14 +560,14 @@ export function FileSystemWindow({
           </button>
           <button
             onClick={() => setViewMode("list")}
-            className={`rounded p-1 hover:text-white ${
-              viewMode === "list" ? "bg-[#023859] text-[#A7EBF2]" : ""
+            className={`rounded p-1 hover:text-[rgb(var(--eios-text-white))] ${
+              viewMode === "list" ? "bg-[rgb(var(--eios-023859))] text-[rgb(var(--eios-a7ebf2))]" : ""
             }`}
             title="List view"
           >
             <List className="h-3.5 w-3.5" />
           </button>
-          <button className="rounded p-1 hover:text-white" title="Options">
+          <button className="rounded p-1 hover:text-[rgb(var(--eios-text-white))]" title="Options">
             <MoreVertical className="h-3.5 w-3.5" />
           </button>
         </div>
@@ -576,12 +576,12 @@ export function FileSystemWindow({
       {/* 3. Main Workspace: Sidebar Tree + Content */}
       <div className="flex flex-1 overflow-hidden">
         {/* Left Tree Sidebar matching the EIOS Drive specification */}
-        <div className="w-40 border-r border-[#0d2e49] bg-[#010e1c] p-2 overflow-y-auto scrollbar-themed">
-          <div className="flex items-center justify-between px-2 pb-1.5 border-b border-[#0d2e49]/40">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-300">
+        <div className="w-40 border-r border-[rgb(var(--eios-0d2e49))] bg-[rgb(var(--eios-010e1c))] p-2 overflow-y-auto scrollbar-themed">
+          <div className="flex items-center justify-between px-2 pb-1.5 border-b border-[rgb(var(--eios-0d2e49))]/40">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-[rgb(var(--eios-text-slate-300))]">
               EIOS Drive
             </span>
-            <span className="text-[9px] font-mono text-[#54ACBF]">Enterprise</span>
+            <span className="text-[9px] font-mono text-[rgb(var(--eios-54acbf))]">Enterprise</span>
           </div>
 
           <div className="mt-1.5 space-y-0.5">
@@ -594,8 +594,8 @@ export function FileSystemWindow({
                   title={folder.desc}
                   className={`flex w-full items-center justify-between rounded px-2 py-1 text-xs font-medium transition-colors ${
                     isActive
-                      ? "bg-[#023859] text-[#A7EBF2] border border-[#26658C]"
-                      : "text-slate-300 hover:bg-[#02243d] hover:text-white"
+                      ? "bg-[rgb(var(--eios-023859))] text-[rgb(var(--eios-a7ebf2))] border border-[rgb(var(--eios-26658c))]"
+                      : "text-[rgb(var(--eios-text-slate-300))] hover:bg-[rgb(var(--eios-02243d))] hover:text-[rgb(var(--eios-text-white))]"
                   }`}
                 >
                   <div className="flex items-center gap-1.5 truncate">
@@ -603,7 +603,7 @@ export function FileSystemWindow({
                     <span className="truncate">{folder.label}</span>
                   </div>
                   {folder.id === "home" && (
-                    <span className="text-[8px] px-1 rounded bg-[#021f36] text-[#A7EBF2] font-mono border border-[#26658C]">
+                    <span className="text-[8px] px-1 rounded bg-[rgb(var(--eios-021f36))] text-[rgb(var(--eios-a7ebf2))] font-mono border border-[rgb(var(--eios-26658c))]">
                       OTel
                     </span>
                   )}
@@ -614,9 +614,9 @@ export function FileSystemWindow({
         </div>
 
         {/* Right Content Grid / List with REALISTIC SOLID ICONS */}
-        <div className="flex-1 overflow-y-auto p-3 scrollbar-themed bg-[#010814]">
+        <div className="flex-1 overflow-y-auto p-3 scrollbar-themed bg-[rgb(var(--eios-010814))]">
           {filteredFiles.length === 0 ? (
-            <div className="flex h-full flex-col items-center justify-center text-slate-400">
+            <div className="flex h-full flex-col items-center justify-center text-[rgb(var(--eios-text-slate-400))]">
               <span className="text-2xl mb-1">📂</span>
               <span className="text-xs">No files match '{searchQuery}'</span>
             </div>
@@ -632,8 +632,8 @@ export function FileSystemWindow({
                     onClick={() => handleItemClick(item)}
                     className={`group relative flex flex-col items-center justify-center rounded-xl p-2.5 border transition-all cursor-pointer ${
                       isSelected
-                        ? "border-[#54ACBF] bg-[#02243d]"
-                        : "border-[#0d2e49] bg-[#021424] hover:border-[#26658C] hover:bg-[#031d33]"
+                        ? "border-[rgb(var(--eios-54acbf))] bg-[rgb(var(--eios-02243d))]"
+                        : "border-[rgb(var(--eios-0d2e49))] bg-[rgb(var(--eios-021424))] hover:border-[rgb(var(--eios-26658c))] hover:bg-[rgb(var(--eios-031d33))]"
                     }`}
                   >
                     {/* Realistic Solid Icon (Folder / File) */}
@@ -645,10 +645,10 @@ export function FileSystemWindow({
                       )}
                     </div>
 
-                    <span className="w-full text-center text-xs font-semibold text-slate-200 truncate group-hover:text-[#A7EBF2]">
+                    <span className="w-full text-center text-xs font-semibold text-[rgb(var(--eios-text-slate-200))] truncate group-hover:text-[rgb(var(--eios-a7ebf2))]">
                       {item.name}
                     </span>
-                    <span className="text-[9.5px] text-[#54ACBF] font-mono truncate max-w-full">
+                    <span className="text-[9.5px] text-[rgb(var(--eios-54acbf))] font-mono truncate max-w-full">
                       {item.meta}
                     </span>
                   </div>
@@ -656,15 +656,15 @@ export function FileSystemWindow({
               })}
             </div>
           ) : (
-            <div className="divide-y divide-[#0d2e49]">
+            <div className="divide-y divide-[rgb(var(--eios-0d2e49))]">
               {filteredFiles.map((item) => (
                 <div
                   key={item.id}
                   onClick={() => handleItemClick(item)}
                   className={`flex items-center justify-between py-1.5 px-3 rounded cursor-pointer transition-colors ${
                     selectedItem === item.name
-                      ? "bg-[#023859] text-[#A7EBF2]"
-                      : "hover:bg-[#02243d] text-slate-300"
+                      ? "bg-[rgb(var(--eios-023859))] text-[rgb(var(--eios-a7ebf2))]"
+                      : "hover:bg-[rgb(var(--eios-02243d))] text-[rgb(var(--eios-text-slate-300))]"
                   }`}
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
@@ -673,7 +673,7 @@ export function FileSystemWindow({
                     </span>
                     <span className="text-xs font-medium truncate">{item.name}</span>
                   </div>
-                  <span className="font-mono text-xs text-[#54ACBF] shrink-0">{item.meta}</span>
+                  <span className="font-mono text-xs text-[rgb(var(--eios-54acbf))] shrink-0">{item.meta}</span>
                 </div>
               ))}
             </div>
@@ -682,22 +682,22 @@ export function FileSystemWindow({
       </div>
 
       {/* 4. Bottom Status Bar */}
-      <div className="flex h-6 items-center justify-between border-t border-[#0d2e49] bg-[#010e1c] px-3 text-[11px] text-slate-300">
+      <div className="flex h-6 items-center justify-between border-t border-[rgb(var(--eios-0d2e49))] bg-[rgb(var(--eios-010e1c))] px-3 text-[11px] text-[rgb(var(--eios-text-slate-300))]">
         <div className="flex items-center gap-2">
           <span>{filteredFiles.length} items</span>
           <span>|</span>
-          <span className="text-[#A7EBF2]">
+          <span className="text-[rgb(var(--eios-a7ebf2))]">
             {selectedItem ? `1 selected (${selectedItem})` : "0 selected"}
           </span>
         </div>
 
         <div className="flex items-center gap-2">
-          <HardDrive className="h-3 w-3 text-[#54ACBF]" />
+          <HardDrive className="h-3 w-3 text-[rgb(var(--eios-54acbf))]" />
           <span>EIOS Drive</span>
-          <div className="h-1.5 w-24 overflow-hidden rounded-full bg-[#021424] border border-[#0d2e49]">
-            <div className="h-full w-1/2 bg-[#26658C] rounded-full" />
+          <div className="h-1.5 w-24 overflow-hidden rounded-full bg-[rgb(var(--eios-021424))] border border-[rgb(var(--eios-0d2e49))]">
+            <div className="h-full w-1/2 bg-[rgb(var(--eios-26658c))] rounded-full" />
           </div>
-          <span className="font-mono text-[10px] text-[#A7EBF2]">
+          <span className="font-mono text-[10px] text-[rgb(var(--eios-a7ebf2))]">
             256 GB free of 512 GB
           </span>
         </div>

@@ -12,6 +12,7 @@
 
 [CmdletBinding()]
 param(
+    [switch]$Build,
     [switch]$Demo,
     [int]$DemoUsers = 20
 )
@@ -60,7 +61,7 @@ if ($LASTEXITCODE -ne 0) {
     $exe = if (Test-Path $userExe) { $userExe } elseif (Test-Path $progExe) { $progExe } else { $null }
     if ($exe) {
         Write-Host "  starting Docker Desktop ($exe)"
-        Start-Process $exe
+        Start-Process -FilePath $exe -WindowStyle Hidden
     } else {
         Write-Error "Docker is not running and Docker Desktop was not found at $userExe or $progExe"
     }
@@ -73,9 +74,13 @@ if ($LASTEXITCODE -ne 0) {
 
 # --- 2. Bring the stack up -------------------------------------------------
 
-Write-Host "`n[2/5] Compose up (33 containers, first run pulls images)" -ForegroundColor Cyan
+Write-Host "`n[2/5] Compose up (first run pulls images)" -ForegroundColor Cyan
 Push-Location $demoDir
 try {
+    if ($Build) {
+        docker compose @composeArgs build eios-ingest eios-detect eios-orchestrator eios-intelligence eios-dashboard
+        if ($LASTEXITCODE -ne 0) { Write-Error "Backend/dashboard build failed." }
+    }
     # Kafka regularly misses its healthcheck window on a cold boot, which aborts
     # every service that depends on it. A second pass starts those once it is up.
     docker compose @composeArgs up -d
@@ -94,7 +99,8 @@ try {
 
     Write-Host "`n[3/5] Kafka broker" -ForegroundColor Cyan
     $brokerUp = Wait-For "broker accepting clients" {
-        docker exec kafka /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:9092 --list *>$null
+        # Keep the probe JVM small and uninstrumented inside Kafka's memory limit.
+        docker exec -e "KAFKA_HEAP_OPTS=-Xms32m -Xmx64m" -e "KAFKA_OPTS=" kafka /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:9092 --list *>$null
         $LASTEXITCODE -eq 0
     } 300
 

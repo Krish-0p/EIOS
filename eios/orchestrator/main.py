@@ -34,6 +34,8 @@ from fs_router import router as fs_router
 from services_router import router as services_router
 from agents_router import router as agents_router
 from auth_router import router as auth_router
+from intelligence_router import router as intelligence_router
+from intelligence.migrate import migrate
 
 logging.basicConfig(
     level=config.LOG_LEVEL,
@@ -97,7 +99,8 @@ def consume_incidents() -> None:
             "enable.auto.commit": True,
         }
     )
-    consumer.subscribe([config.INCIDENTS_TOPIC])
+    intelligence_topic = os.getenv("EIOS_INTELLIGENCE_TOPIC", "eios.intelligence")
+    consumer.subscribe([config.INCIDENTS_TOPIC, intelligence_topic])
     log.info("consuming %s", config.INCIDENTS_TOPIC)
     try:
         while not _stop.is_set():
@@ -113,7 +116,8 @@ def consume_incidents() -> None:
             except Exception:
                 log.exception("bad incident payload")
                 continue
-            hub.publish_threadsafe({"type": "incident", "data": incident})
+            kind = "incident" if msg.topic() == config.INCIDENTS_TOPIC else "intelligence"
+            hub.publish_threadsafe({"type": kind, "data": incident})
     finally:
         consumer.close()
 
@@ -121,6 +125,8 @@ def consume_incidents() -> None:
 @contextlib.asynccontextmanager
 async def lifespan(app: FastAPI):
     db.pool.open()
+    with db.pool.connection() as conn:
+        migrate(conn)
     hub.loop = asyncio.get_running_loop()
     worker = threading.Thread(target=consume_incidents, name="incidents", daemon=True)
     worker.start()
@@ -150,6 +156,7 @@ app.include_router(fs_router)
 app.include_router(services_router)
 app.include_router(agents_router)
 app.include_router(auth_router)
+app.include_router(intelligence_router)
 
 
 class StartFault(BaseModel):

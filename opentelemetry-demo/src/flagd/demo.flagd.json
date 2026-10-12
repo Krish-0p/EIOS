@@ -117,7 +117,7 @@
       }
     },
     "paymentUnreachable": {
-      "defaultVariant": "off",
+      "defaultVariant": "on",
       "description": "Payment service is unavailable",
       "state": "ENABLED",
       "variants": {

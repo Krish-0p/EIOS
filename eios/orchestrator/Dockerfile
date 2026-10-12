@@ -6,6 +6,9 @@ COPY orchestrator/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY schemas/ ./schemas/
+COPY intelligence/ ./intelligence/
+COPY db/ ./db/
+COPY security/ ./security/
 COPY orchestrator/*.py ./
 
 ENV PYTHONUNBUFFERED=1

@@ -26,8 +26,8 @@ EVAL_SECONDS = _int("EIOS_EVAL_SECONDS", 30)
 # sustained fault produces one incident rather than a stream of them.
 COOLDOWN_SECONDS = _int("EIOS_COOLDOWN_SECONDS", 180)
 
-# Infrastructure thresholds. memory_ratio is a percentage (0-100),
-# cpu_ratio is a fraction of one core.
+# Rule state converts source CPU percentages to cores. memory_ratio remains
+# percent (0-100); new events also carry explicitly named canonical metrics.
 MEM_HIGH = _float("EIOS_MEM_HIGH", 92.0)
 MEM_MEDIUM = _float("EIOS_MEM_MEDIUM", 85.0)
 CPU_FLOOR = _float("EIOS_CPU_FLOOR", 0.50)

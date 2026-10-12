@@ -13,6 +13,9 @@ COPY ingest/proto/demo.proto ./proto/demo.proto
 RUN python -m grpc_tools.protoc -I./proto --python_out=. ./proto/demo.proto
 
 COPY schemas/ ./schemas/
+COPY security/ ./security/
+COPY intelligence/ ./intelligence/
+COPY db/ ./db/
 COPY ingest/*.py ./
 
 ENV PYTHONUNBUFFERED=1

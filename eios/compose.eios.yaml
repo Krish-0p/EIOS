@@ -91,6 +91,40 @@ services:
           memory: 250M
     logging: *logging
 
+  eios-intelligence:
+    build:
+      context: ../eios
+      dockerfile: intelligence/Dockerfile
+    container_name: eios-intelligence
+    environment:
+      - KAFKA_ADDR=kafka:9092
+      - EIOS_POSTGRES_DSN=postgresql://eios:eios@eios-postgres:5432/eios
+      - EIOS_INTELLIGENCE_EVAL_SECONDS=30
+      - EIOS_INTELLIGENCE_LATENESS_SECONDS=90
+      - JAEGER_URL=http://jaeger:16686
+      - EIOS_MODEL_DIR=/models
+      - EIOS_LOG_LEVEL=INFO
+    volumes:
+      - eios-models:/models
+    depends_on:
+      eios-postgres:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-m", "intelligence.health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 60s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          memory: 450M
+          cpus: '1.0'
+    logging: *logging
+
   eios-orchestrator:
     build:
       context: ../eios
@@ -153,3 +187,4 @@ services:
 
 volumes:
   eios-pgdata:
+  eios-models:

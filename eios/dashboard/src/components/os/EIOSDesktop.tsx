@@ -10,6 +10,7 @@ import { ConfigViewerModal } from "./ConfigViewerModal";
 import { AIAssistantModal } from "./AIAssistantModal";
 import { ProcessMonitorModal } from "./ProcessMonitorModal";
 import { SecurityCenterWindow } from "./SecurityCenterWindow";
+import { ReportsWindow } from "./ReportsWindow";
 import { ApplicationOnboardingModal } from "./ApplicationOnboardingModal";
 import {
   api,
@@ -129,7 +130,7 @@ export function EIOSDesktop({
     : 94;
 
   return (
-    <div className="os-wallpaper relative flex h-screen w-screen flex-col overflow-hidden text-slate-100 font-sans select-none antialiased bg-[#01040a]">
+    <div className="os-wallpaper relative flex h-screen w-screen flex-col overflow-hidden text-[rgb(var(--eios-text-slate-100))] font-sans select-none antialiased bg-[rgb(var(--eios-01040a))]">
       {/* 1. Global OS Header Bar */}
       <OSHeader
         ecoMode={ecoMode}
@@ -140,7 +141,7 @@ export function EIOSDesktop({
       />
 
       {/* 2. Main Desktop Canvas (Left Icons + Center Windows + Right Sidebar) */}
-      <main className="relative flex flex-1 overflow-hidden min-h-0 bg-[#01040a]">
+      <main className="relative flex flex-1 overflow-hidden min-h-0 bg-[rgb(var(--eios-01040a))]">
         {/* Left Desktop Launcher Column */}
         <DesktopIcons
           activeWindows={windows}
@@ -148,8 +149,17 @@ export function EIOSDesktop({
         />
 
         {/* Center Desktop Windows Workspace */}
-        <div className="relative flex-1 p-2.5 overflow-y-auto scrollbar-themed flex flex-col gap-2.5 min-h-0 bg-[#01040a]">
+        <div className="relative flex-1 p-2.5 overflow-y-auto scrollbar-themed flex flex-col gap-2.5 min-h-0 bg-[rgb(var(--eios-01040a))]">
           {/* Top Row: File System Window */}
+          {windows.reports && (
+            <ReportsWindow
+              onClose={() => handleCloseWindow("reports")}
+              onMinimize={() => handleCloseWindow("reports")}
+              isMaximized={maximizedWindow === "reports"}
+              onToggleMaximize={() => handleToggleMaximize("reports")}
+              operator={adminUser}
+            />
+          )}
           {windows.filesystem && (
             <div className="w-full">
               <FileSystemWindow

@@ -49,16 +49,26 @@ class State:
 
     def add(self, event) -> None:
         with self._lock:
-            if event.domain == Domain.INFRASTRUCTURE:
+            if event.domain == Domain.INFRASTRUCTURE and event.entity.kind == EntityKind.CONTAINER:
+                metrics = dict(event.metrics)
+                if "cpu_cores" in metrics:
+                    metrics["cpu_ratio"] = metrics["cpu_cores"]
+                elif "cpu_ratio" in metrics:
+                    metrics["cpu_ratio"] /= 100.0
+                if "memory_fraction" in metrics:
+                    metrics["memory_ratio"] = metrics["memory_fraction"] * 100.0
+                history = self.infra[event.entity.id]
+                if any(s[0] == event.observed_at and s[1].keys() == metrics.keys() for s in list(history)[-8:]):
+                    return
                 self.infra[event.entity.id].append(
-                    (event.observed_at, event.metrics, str(event.event_id))
+                    (event.observed_at, metrics, str(event.event_id))
                 )
-            elif event.domain == Domain.ECOMMERCE:
+            elif event.domain == Domain.ECOMMERCE and event.entity.kind == EntityKind.ORDER:
                 self.orders.append((event.observed_at, str(event.event_id)))
 
     def snapshot_infra(self) -> dict[str, list]:
         with self._lock:
-            return {name: list(samples) for name, samples in self.infra.items()}
+            return {name: sorted(samples,key=lambda s:s[0]) for name, samples in self.infra.items()}
 
     def snapshot_orders(self) -> list:
         with self._lock:
@@ -68,7 +78,12 @@ class State:
 def _trailing_run(samples: list, metric: str, threshold: float) -> list:
     """The run of most recent samples at or above threshold, oldest first."""
     run: list = []
+    samples = [s for s in samples if metric in s[1]]
+    previous = None
     for observed_at, metrics, event_id in reversed(samples):
+        if previous and (previous-observed_at).total_seconds() > 90:
+            break
+        previous = observed_at
         value = metrics.get(metric)
         if value is None or value < threshold:
             break
@@ -111,11 +126,15 @@ def _cpu_finding(container: str, samples: list) -> Finding | None:
     A service can be legitimately busy; what matters is a departure from how
     busy it usually is.
     """
-    values = [m.get("cpu_ratio") for _, m, _ in samples if m.get("cpu_ratio") is not None]
+    samples = [s for s in samples if "cpu_ratio" in s[1]]
+    values = [m["cpu_ratio"] for _, m, _ in samples]
     if len(values) < config.SUSTAINED_SAMPLES * 3:
         return None
 
     recent = values[-config.SUSTAINED_SAMPLES :]
+    recent_samples = samples[-config.SUSTAINED_SAMPLES:]
+    if any((b[0]-a[0]).total_seconds()>90 for a,b in zip(recent_samples,recent_samples[1:])):
+        return None
     baseline_values = values[: -config.SUSTAINED_SAMPLES]
     baseline = statistics.median(baseline_values)
 
@@ -150,7 +169,10 @@ def _cpu_finding(container: str, samples: list) -> Finding | None:
 def infrastructure_rules(state: State, now: datetime) -> list[Finding]:
     findings: list[Finding] = []
     for container, samples in state.snapshot_infra().items():
+        samples = [s for s in samples if 0 <= (now - s[0]).total_seconds() <= 1800]
         if len(samples) < config.SUSTAINED_SAMPLES:
+            continue
+        if (now - samples[-1][0]).total_seconds() > 180:
             continue
         for finding in (
             _memory_finding(container, samples),

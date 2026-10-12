@@ -1,4 +1,11 @@
 const BASE = import.meta.env.VITE_API_BASE ?? "http://127.0.0.1:8000";
+import type { IntelligenceStatus, FeatureWindow, IntelligenceInsight, IntelligenceForecast, IntelligenceModel } from "./intelligence";
+
+function intelligenceQuery(service: string, extra: Record<string, string> = {}) {
+  const query = new URLSearchParams(extra);
+  if (service) query.set("service", service);
+  return `?${query}`;
+}
 
 export type Severity = "info" | "low" | "medium" | "high" | "critical";
 
@@ -414,6 +421,13 @@ export const api = {
   fsInfo: () => get<{ root: string; exists: boolean; disk: { total_gb: number; used_gb: number; free_gb: number; percent: number } }>("/api/fs/info"),
 
   // Intelligence & Agents
+  intelligenceStatus: () => get<IntelligenceStatus>("/api/intelligence/status"),
+  intelligenceKpis: (service = "") => get<FeatureWindow[]>(`/api/intelligence/kpis${intelligenceQuery(service)}`),
+  intelligenceInsights: (service = "", hours = 24) => get<IntelligenceInsight[]>(`/api/intelligence/insights${intelligenceQuery(service, { since: new Date(Date.now() - hours * 3600000).toISOString(), limit: "500" })}`),
+  intelligenceForecasts: (service = "") => get<IntelligenceForecast[]>(`/api/intelligence/forecasts${intelligenceQuery(service)}`),
+  intelligenceModels: (service = "") => get<IntelligenceModel[]>(`/api/intelligence/models${intelligenceQuery(service)}`),
+  intelligenceHistory: (service: string, minutes = 60) => get<FeatureWindow[]>(`/api/intelligence/history${intelligenceQuery(service, { minutes: String(minutes) })}`),
+  intelligenceFeedback: (insight_id: string, verdict: "confirm" | "dismiss", operator: string) => post<{ message: string }>("/api/intelligence/feedback", { insight_id, verdict, operator }),
   aiChat: (query: string, context?: any) =>
     post<{ reply: string; timestamp: string; context_snapshot: any }>("/api/ai/chat", { query, context }),
   cases: () => get<any[]>("/api/cases"),

@@ -202,26 +202,26 @@ export function SecurityCenterWindow({
   return (
     <section
       aria-label="EIOS Security Operations Center"
-      className={`os-window flex flex-col rounded-2xl overflow-hidden shadow-2xl border border-[#26658C]/80 bg-[#010814] select-none ${
+      className={`os-window flex flex-col rounded-2xl overflow-hidden shadow-2xl border border-[rgb(var(--eios-26658c))]/80 bg-[rgb(var(--eios-010814))] select-none ${
         isMaximized
           ? "fixed inset-2 z-50 rounded-xl"
           : "w-full min-h-[520px] max-h-[640px]"
       }`}
     >
       {/* 1. Window Header Bar */}
-      <div className="flex h-11 items-center justify-between border-b border-[#0d2e49] bg-[#021324] px-4">
+      <div className="flex h-11 items-center justify-between border-b border-[rgb(var(--eios-0d2e49))] bg-[rgb(var(--eios-021324))] px-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#02243d] border border-[#26658C]">
-            <ShieldCheck className="h-4 w-4 text-[#54ACBF]" />
+          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[rgb(var(--eios-02243d))] border border-[rgb(var(--eios-26658c))]">
+            <ShieldCheck className="h-4 w-4 text-[rgb(var(--eios-54acbf))]" />
           </div>
           <div className="flex flex-col">
-            <span className="font-display text-xs font-bold text-slate-100 tracking-wide flex items-center gap-2">
+            <span className="font-display text-xs font-bold text-[rgb(var(--eios-text-slate-100))] tracking-wide flex items-center gap-2">
               EIOS Enterprise Security Center
-              <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-[#032a47] text-[#A7EBF2] border border-[#26658C]">
+              <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-[rgb(var(--eios-032a47))] text-[rgb(var(--eios-a7ebf2))] border border-[rgb(var(--eios-26658c))]">
                 v{status?.version || "1.0.0"}
               </span>
             </span>
-            <span className="text-[10px] text-slate-400 font-mono">
+            <span className="text-[10px] text-[rgb(var(--eios-text-slate-400))] font-mono">
               Zero-Trust Mesh & Cryptographic Audit Verification
             </span>
           </div>
@@ -232,15 +232,15 @@ export function SecurityCenterWindow({
           <div
             className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono border ${
               status?.security_enabled || apiKey
-                ? "bg-emerald-950/60 border-emerald-500/40 text-emerald-300"
-                : "bg-[#041c30] border-[#26658C] text-[#A7EBF2]"
+                ? "bg-[rgb(var(--eios-surface-emerald-950))]/60 border-emerald-500/40 text-[rgb(var(--eios-text-emerald-300))]"
+                : "bg-[rgb(var(--eios-041c30))] border-[rgb(var(--eios-26658c))] text-[rgb(var(--eios-a7ebf2))]"
             }`}
           >
             <span
               className={`h-1.5 w-1.5 rounded-full ${
                 status?.security_enabled || apiKey
                   ? "bg-emerald-400 animate-pulse"
-                  : "bg-[#54ACBF]"
+                  : "bg-[rgb(var(--eios-54acbf))]"
               }`}
             />
             <span>
@@ -253,7 +253,7 @@ export function SecurityCenterWindow({
           <button
             onClick={loadSecurityData}
             title="Refresh Security Status"
-            className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#031d33] hover:bg-[#072c4c] border border-[#26658C] text-slate-300 transition-colors"
+            className="flex h-7 w-7 items-center justify-center rounded-lg bg-[rgb(var(--eios-031d33))] hover:bg-[rgb(var(--eios-072c4c))] border border-[rgb(var(--eios-26658c))] text-[rgb(var(--eios-text-slate-300))] transition-colors"
           >
             <RefreshCw
               className={`h-3.5 w-3.5 ${loading ? "animate-spin" : ""}`}
@@ -262,19 +262,19 @@ export function SecurityCenterWindow({
 
           <button
             onClick={onMinimize}
-            className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#031d33] hover:bg-[#072c4c] border border-[#26658C] text-slate-300"
+            className="flex h-7 w-7 items-center justify-center rounded-lg bg-[rgb(var(--eios-031d33))] hover:bg-[rgb(var(--eios-072c4c))] border border-[rgb(var(--eios-26658c))] text-[rgb(var(--eios-text-slate-300))]"
           >
             <Minus className="h-3.5 w-3.5" />
           </button>
           <button
             onClick={onToggleMaximize}
-            className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#031d33] hover:bg-[#072c4c] border border-[#26658C] text-slate-300"
+            className="flex h-7 w-7 items-center justify-center rounded-lg bg-[rgb(var(--eios-031d33))] hover:bg-[rgb(var(--eios-072c4c))] border border-[rgb(var(--eios-26658c))] text-[rgb(var(--eios-text-slate-300))]"
           >
             <Square className="h-3 w-3" />
           </button>
           <button
             onClick={onClose}
-            className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#031d33] hover:bg-rose-900/80 border border-[#26658C] hover:border-rose-500 text-slate-300 hover:text-white"
+            className="flex h-7 w-7 items-center justify-center rounded-lg bg-[rgb(var(--eios-031d33))] hover:bg-[rgb(var(--eios-surface-rose-900))]/80 border border-[rgb(var(--eios-26658c))] hover:border-rose-500 text-[rgb(var(--eios-text-slate-300))] hover:text-[rgb(var(--eios-text-white))]"
           >
             <X className="h-3.5 w-3.5" />
           </button>
@@ -282,13 +282,13 @@ export function SecurityCenterWindow({
       </div>
 
       {/* 2. Navigation Tabs Bar */}
-      <div className="flex items-center gap-1 border-b border-[#0d2e49] bg-[#010c18] px-4 py-2">
+      <div className="flex items-center gap-1 border-b border-[rgb(var(--eios-0d2e49))] bg-[rgb(var(--eios-010c18))] px-4 py-2">
         <button
           onClick={() => setActiveTab("posture")}
           className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
             activeTab === "posture"
-              ? "bg-[#02243d] text-[#A7EBF2] border border-[#26658C]"
-              : "text-slate-400 hover:text-slate-200 hover:bg-[#02182b]"
+              ? "bg-[rgb(var(--eios-02243d))] text-[rgb(var(--eios-a7ebf2))] border border-[rgb(var(--eios-26658c))]"
+              : "text-[rgb(var(--eios-text-slate-400))] hover:text-[rgb(var(--eios-text-slate-200))] hover:bg-[rgb(var(--eios-02182b))]"
           }`}
         >
           <Shield className="h-3.5 w-3.5" />
@@ -299,14 +299,14 @@ export function SecurityCenterWindow({
           onClick={() => setActiveTab("alerts")}
           className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
             activeTab === "alerts"
-              ? "bg-[#02243d] text-[#A7EBF2] border border-[#26658C]"
-              : "text-slate-400 hover:text-slate-200 hover:bg-[#02182b]"
+              ? "bg-[rgb(var(--eios-02243d))] text-[rgb(var(--eios-a7ebf2))] border border-[rgb(var(--eios-26658c))]"
+              : "text-[rgb(var(--eios-text-slate-400))] hover:text-[rgb(var(--eios-text-slate-200))] hover:bg-[rgb(var(--eios-02182b))]"
           }`}
         >
           <ShieldAlert className="h-3.5 w-3.5" />
           <span>Security Alerts</span>
           {alerts.length > 0 && (
-            <span className="ml-1 rounded-full bg-rose-500/20 px-1.5 py-0.2 text-[10px] font-mono text-rose-300 border border-rose-500/30">
+            <span className="ml-1 rounded-full bg-rose-500/20 px-1.5 py-0.2 text-[10px] font-mono text-[rgb(var(--eios-text-rose-300))] border border-rose-500/30">
               {alerts.length}
             </span>
           )}
@@ -316,8 +316,8 @@ export function SecurityCenterWindow({
           onClick={() => setActiveTab("audit")}
           className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
             activeTab === "audit"
-              ? "bg-[#02243d] text-[#A7EBF2] border border-[#26658C]"
-              : "text-slate-400 hover:text-slate-200 hover:bg-[#02182b]"
+              ? "bg-[rgb(var(--eios-02243d))] text-[rgb(var(--eios-a7ebf2))] border border-[rgb(var(--eios-26658c))]"
+              : "text-[rgb(var(--eios-text-slate-400))] hover:text-[rgb(var(--eios-text-slate-200))] hover:bg-[rgb(var(--eios-02182b))]"
           }`}
         >
           <FileCheck className="h-3.5 w-3.5" />
@@ -328,8 +328,8 @@ export function SecurityCenterWindow({
           onClick={() => setActiveTab("redactor")}
           className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
             activeTab === "redactor"
-              ? "bg-[#02243d] text-[#A7EBF2] border border-[#26658C]"
-              : "text-slate-400 hover:text-slate-200 hover:bg-[#02182b]"
+              ? "bg-[rgb(var(--eios-02243d))] text-[rgb(var(--eios-a7ebf2))] border border-[rgb(var(--eios-26658c))]"
+              : "text-[rgb(var(--eios-text-slate-400))] hover:text-[rgb(var(--eios-text-slate-200))] hover:bg-[rgb(var(--eios-02182b))]"
           }`}
         >
           <Eye className="h-3.5 w-3.5" />
@@ -340,8 +340,8 @@ export function SecurityCenterWindow({
           onClick={() => setActiveTab("apikey")}
           className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
             activeTab === "apikey"
-              ? "bg-[#02243d] text-[#A7EBF2] border border-[#26658C]"
-              : "text-slate-400 hover:text-slate-200 hover:bg-[#02182b]"
+              ? "bg-[rgb(var(--eios-02243d))] text-[rgb(var(--eios-a7ebf2))] border border-[rgb(var(--eios-26658c))]"
+              : "text-[rgb(var(--eios-text-slate-400))] hover:text-[rgb(var(--eios-text-slate-200))] hover:bg-[rgb(var(--eios-02182b))]"
           }`}
         >
           <Key className="h-3.5 w-3.5" />
@@ -350,10 +350,10 @@ export function SecurityCenterWindow({
       </div>
 
       {/* 3. Tab Contents Canvas */}
-      <div className="flex-1 overflow-y-auto p-4 scrollbar-themed bg-[#010814]">
+      <div className="flex-1 overflow-y-auto p-4 scrollbar-themed bg-[rgb(var(--eios-010814))]">
         {error && (
-          <div className="mb-4 flex items-center gap-2.5 rounded-xl border border-rose-500/40 bg-rose-950/30 p-3 text-xs text-rose-200">
-            <AlertTriangle className="h-4 w-4 text-rose-400 shrink-0" />
+          <div className="mb-4 flex items-center gap-2.5 rounded-xl border border-rose-500/40 bg-[rgb(var(--eios-surface-rose-950))]/30 p-3 text-xs text-[rgb(var(--eios-text-rose-200))]">
+            <AlertTriangle className="h-4 w-4 text-[rgb(var(--eios-text-rose-400))] shrink-0" />
             <span>{error}</span>
           </div>
         )}
@@ -363,121 +363,121 @@ export function SecurityCenterWindow({
           <div className="space-y-4">
             {/* Top Overview Cards */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
-              <div className="rounded-xl border border-[#26658C]/70 bg-[#021324] p-3.5">
-                <div className="flex items-center justify-between text-slate-400 mb-1">
+              <div className="rounded-xl border border-[rgb(var(--eios-26658c))]/70 bg-[rgb(var(--eios-021324))] p-3.5">
+                <div className="flex items-center justify-between text-[rgb(var(--eios-text-slate-400))] mb-1">
                   <span className="text-[11px] font-medium">Rate Limiter</span>
-                  <Sliders className="h-3.5 w-3.5 text-[#54ACBF]" />
+                  <Sliders className="h-3.5 w-3.5 text-[rgb(var(--eios-54acbf))]" />
                 </div>
-                <div className="font-mono text-base font-bold text-slate-100">
+                <div className="font-mono text-base font-bold text-[rgb(var(--eios-text-slate-100))]">
                   {status?.rate_limiting
                     ? `${status.rate_limiting.requests_per_window} req`
                     : "200 req"}
                 </div>
-                <div className="mt-1 text-[10px] text-slate-400 font-mono">
+                <div className="mt-1 text-[10px] text-[rgb(var(--eios-text-slate-400))] font-mono">
                   Sliding window: {status?.rate_limiting?.window_seconds || 60}s
                 </div>
               </div>
 
-              <div className="rounded-xl border border-[#26658C]/70 bg-[#021324] p-3.5">
-                <div className="flex items-center justify-between text-slate-400 mb-1">
+              <div className="rounded-xl border border-[rgb(var(--eios-26658c))]/70 bg-[rgb(var(--eios-021324))] p-3.5">
+                <div className="flex items-center justify-between text-[rgb(var(--eios-text-slate-400))] mb-1">
                   <span className="text-[11px] font-medium">PII Redactor</span>
-                  <Eye className="h-3.5 w-3.5 text-emerald-400" />
+                  <Eye className="h-3.5 w-3.5 text-[rgb(var(--eios-text-emerald-400))]" />
                 </div>
-                <div className="font-mono text-base font-bold text-emerald-300">
+                <div className="font-mono text-base font-bold text-[rgb(var(--eios-text-emerald-300))]">
                   {status?.redaction_enabled !== false ? "ACTIVE" : "BYPASSED"}
                 </div>
-                <div className="mt-1 text-[10px] text-slate-400 font-mono">
+                <div className="mt-1 text-[10px] text-[rgb(var(--eios-text-slate-400))] font-mono">
                   JWT, API Key & Password filters
                 </div>
               </div>
 
-              <div className="rounded-xl border border-[#26658C]/70 bg-[#021324] p-3.5">
-                <div className="flex items-center justify-between text-slate-400 mb-1">
+              <div className="rounded-xl border border-[rgb(var(--eios-26658c))]/70 bg-[rgb(var(--eios-021324))] p-3.5">
+                <div className="flex items-center justify-between text-[rgb(var(--eios-text-slate-400))] mb-1">
                   <span className="text-[11px] font-medium">Audit Integrity</span>
-                  <FileCheck className="h-3.5 w-3.5 text-[#54ACBF]" />
+                  <FileCheck className="h-3.5 w-3.5 text-[rgb(var(--eios-54acbf))]" />
                 </div>
-                <div className="font-mono text-base font-bold text-[#A7EBF2]">
+                <div className="font-mono text-base font-bold text-[rgb(var(--eios-a7ebf2))]">
                   SHA-256 Chained
                 </div>
-                <div className="mt-1 text-[10px] text-slate-400 font-mono">
+                <div className="mt-1 text-[10px] text-[rgb(var(--eios-text-slate-400))] font-mono">
                   Cryptographic ledger verified
                 </div>
               </div>
 
-              <div className="rounded-xl border border-[#26658C]/70 bg-[#021324] p-3.5">
-                <div className="flex items-center justify-between text-slate-400 mb-1">
+              <div className="rounded-xl border border-[rgb(var(--eios-26658c))]/70 bg-[rgb(var(--eios-021324))] p-3.5">
+                <div className="flex items-center justify-between text-[rgb(var(--eios-text-slate-400))] mb-1">
                   <span className="text-[11px] font-medium">CORS Policy</span>
-                  <Lock className="h-3.5 w-3.5 text-sky-400" />
+                  <Lock className="h-3.5 w-3.5 text-[rgb(var(--eios-text-sky-400))]" />
                 </div>
-                <div className="font-mono text-base font-bold text-slate-100">
+                <div className="font-mono text-base font-bold text-[rgb(var(--eios-text-slate-100))]">
                   {status?.cors_origins?.length || 2} Allowed
                 </div>
-                <div className="mt-1 text-[10px] text-slate-400 font-mono truncate" title={status?.cors_origins?.join(", ")}>
+                <div className="mt-1 text-[10px] text-[rgb(var(--eios-text-slate-400))] font-mono truncate" title={status?.cors_origins?.join(", ")}>
                   {status?.cors_origins?.[0] || "localhost:5173"}
                 </div>
               </div>
             </div>
 
             {/* Core Modules Breakdown */}
-            <div className="rounded-xl border border-[#0d2e49] bg-[#021020] p-4">
-              <h3 className="font-display text-xs font-semibold text-slate-200 mb-3 flex items-center gap-2">
-                <Layers className="h-4 w-4 text-[#54ACBF]" />
-                Integrated Security Layer Status (Rehan Shaikh Module Integration)
+            <div className="rounded-xl border border-[rgb(var(--eios-0d2e49))] bg-[rgb(var(--eios-021020))] p-4">
+              <h3 className="font-display text-xs font-semibold text-[rgb(var(--eios-text-slate-200))] mb-3 flex items-center gap-2">
+                <Layers className="h-4 w-4 text-[rgb(var(--eios-54acbf))]" />
+                Integrated Security Layer Status 
               </h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-                <div className="rounded-lg border border-[#0d2e49] bg-[#010914] p-3">
+                <div className="rounded-lg border border-[rgb(var(--eios-0d2e49))] bg-[rgb(var(--eios-010914))] p-3">
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="font-mono font-medium text-slate-200">
+                    <span className="font-mono font-medium text-[rgb(var(--eios-text-slate-200))]">
                       eios.security.redactor
                     </span>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950/70 text-emerald-300 border border-emerald-600/40">
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[rgb(var(--eios-surface-emerald-950))]/70 text-[rgb(var(--eios-text-emerald-300))] border border-emerald-600/40">
                       ENGAGED
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-400 leading-relaxed font-sans">
+                  <p className="text-[11px] text-[rgb(var(--eios-text-slate-400))] leading-relaxed font-sans">
                     Pre-ingest scrubbing of sensitive credentials across Kafka, PostgreSQL, and LLM orchestration prompts. Replaces secrets with verifiable masks.
                   </p>
                 </div>
 
-                <div className="rounded-lg border border-[#0d2e49] bg-[#010914] p-3">
+                <div className="rounded-lg border border-[rgb(var(--eios-0d2e49))] bg-[rgb(var(--eios-010914))] p-3">
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="font-mono font-medium text-slate-200">
+                    <span className="font-mono font-medium text-[rgb(var(--eios-text-slate-200))]">
                       eios.security.audit
                     </span>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#032a47] text-[#A7EBF2] border border-[#26658C]">
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[rgb(var(--eios-032a47))] text-[rgb(var(--eios-a7ebf2))] border border-[rgb(var(--eios-26658c))]">
                       HASH-LINKED
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-400 leading-relaxed font-sans">
+                  <p className="text-[11px] text-[rgb(var(--eios-text-slate-400))] leading-relaxed font-sans">
                     Immutable append-only ledger. Every audit event signs the previous record hash with SHA-256 for tamper-proof regulatory verification.
                   </p>
                 </div>
 
-                <div className="rounded-lg border border-[#0d2e49] bg-[#010914] p-3">
+                <div className="rounded-lg border border-[rgb(var(--eios-0d2e49))] bg-[rgb(var(--eios-010914))] p-3">
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="font-mono font-medium text-slate-200">
+                    <span className="font-mono font-medium text-[rgb(var(--eios-text-slate-200))]">
                       eios.security.ratelimit
                     </span>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950/70 text-emerald-300 border border-emerald-600/40">
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[rgb(var(--eios-surface-emerald-950))]/70 text-[rgb(var(--eios-text-emerald-300))] border border-emerald-600/40">
                       PROTECTING
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-400 leading-relaxed font-sans">
+                  <p className="text-[11px] text-[rgb(var(--eios-text-slate-400))] leading-relaxed font-sans">
                     In-memory thread-safe sliding window rate limiter. Safeguards the orchestrator, ingest endpoints, and PostgreSQL from flood attacks.
                   </p>
                 </div>
 
-                <div className="rounded-lg border border-[#0d2e49] bg-[#010914] p-3">
+                <div className="rounded-lg border border-[rgb(var(--eios-0d2e49))] bg-[rgb(var(--eios-010914))] p-3">
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="font-mono font-medium text-slate-200">
+                    <span className="font-mono font-medium text-[rgb(var(--eios-text-slate-200))]">
                       orchestrator.middleware
                     </span>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#032a47] text-[#A7EBF2] border border-[#26658C]">
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[rgb(var(--eios-032a47))] text-[rgb(var(--eios-a7ebf2))] border border-[rgb(var(--eios-26658c))]">
                       X-API-KEY GATEWAY
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-400 leading-relaxed font-sans">
+                  <p className="text-[11px] text-[rgb(var(--eios-text-slate-400))] leading-relaxed font-sans">
                     FastAPI RequestSizeLimitMiddleware (1MB cap) and SecurityMiddleware with constant-time API key verification and tenant IP extraction.
                   </p>
                 </div>
@@ -490,54 +490,54 @@ export function SecurityCenterWindow({
         {activeTab === "alerts" && (
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs text-slate-400 font-mono">
+              <span className="text-xs text-[rgb(var(--eios-text-slate-400))] font-mono">
                 Showing {alerts.length} security alerts from Kafka attack stream & middleware
               </span>
               <button
                 onClick={loadSecurityData}
-                className="text-[11px] font-mono text-[#54ACBF] hover:underline"
+                className="text-[11px] font-mono text-[rgb(var(--eios-54acbf))] hover:underline"
               >
                 Refresh feed
               </button>
             </div>
 
-            <div className="divide-y divide-[#0d2e49] rounded-xl border border-[#0d2e49] bg-[#021020] overflow-hidden">
+            <div className="divide-y divide-[rgb(var(--eios-0d2e49))] rounded-xl border border-[rgb(var(--eios-0d2e49))] bg-[rgb(var(--eios-021020))] overflow-hidden">
               {alerts.length === 0 ? (
-                <div className="p-8 text-center text-xs text-slate-400">
+                <div className="p-8 text-center text-xs text-[rgb(var(--eios-text-slate-400))]">
                   No active security threats recorded in the current window.
                 </div>
               ) : (
                 alerts.map((alert, i) => (
                   <div
                     key={alert.alert_id || i}
-                    className="flex items-start justify-between p-3.5 hover:bg-[#03182b] transition-colors"
+                    className="flex items-start justify-between p-3.5 hover:bg-[rgb(var(--eios-03182b))] transition-colors"
                   >
                     <div className="flex items-start gap-3">
                       <div
                         className={`mt-0.5 rounded p-1.5 ${
                           alert.severity === "high" || alert.severity === "critical"
-                            ? "bg-rose-950/80 text-rose-300 border border-rose-500/40"
-                            : "bg-amber-950/80 text-amber-300 border border-amber-500/40"
+                            ? "bg-[rgb(var(--eios-surface-rose-950))]/80 text-[rgb(var(--eios-text-rose-300))] border border-rose-500/40"
+                            : "bg-[rgb(var(--eios-surface-amber-950))]/80 text-[rgb(var(--eios-text-amber-300))] border border-amber-500/40"
                         }`}
                       >
                         <AlertTriangle className="h-4 w-4" />
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="font-mono text-xs font-bold text-slate-200">
+                          <span className="font-mono text-xs font-bold text-[rgb(var(--eios-text-slate-200))]">
                             {alert.action}
                           </span>
-                          <span className="rounded bg-[#032a47] px-2 py-0.5 font-mono text-[10px] text-[#A7EBF2]">
+                          <span className="rounded bg-[rgb(var(--eios-032a47))] px-2 py-0.5 font-mono text-[10px] text-[rgb(var(--eios-a7ebf2))]">
                             {alert.actor}
                           </span>
                         </div>
-                        <div className="mt-1 flex items-center gap-3 text-[11px] font-mono text-slate-400">
-                          <span>Source IP: <strong className="text-slate-300">{alert.ip}</strong></span>
+                        <div className="mt-1 flex items-center gap-3 text-[11px] font-mono text-[rgb(var(--eios-text-slate-400))]">
+                          <span>Source IP: <strong className="text-[rgb(var(--eios-text-slate-300))]">{alert.ip}</strong></span>
                           <span>•</span>
                           <span>{new Date(alert.at).toLocaleTimeString()}</span>
                         </div>
                         {alert.detail && (
-                          <div className="mt-1.5 rounded bg-[#010914] px-2.5 py-1 font-mono text-[10px] text-slate-400 border border-[#0d2e49]/60">
+                          <div className="mt-1.5 rounded bg-[rgb(var(--eios-010914))] px-2.5 py-1 font-mono text-[10px] text-[rgb(var(--eios-text-slate-400))] border border-[rgb(var(--eios-0d2e49))]/60">
                             {JSON.stringify(alert.detail)}
                           </div>
                         )}
@@ -547,8 +547,8 @@ export function SecurityCenterWindow({
                     <span
                       className={`text-[10px] font-mono uppercase px-2 py-0.5 rounded ${
                         alert.severity === "high" || alert.severity === "critical"
-                          ? "bg-rose-500/20 text-rose-300"
-                          : "bg-amber-500/20 text-amber-300"
+                          ? "bg-rose-500/20 text-[rgb(var(--eios-text-rose-300))]"
+                          : "bg-amber-500/20 text-[rgb(var(--eios-text-amber-300))]"
                       }`}
                     >
                       {alert.severity || "medium"}
@@ -564,17 +564,17 @@ export function SecurityCenterWindow({
         {activeTab === "audit" && (
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs text-slate-400 font-mono">
+              <span className="text-xs text-[rgb(var(--eios-text-slate-400))] font-mono">
                 Cryptographic SHA-256 Chained Audit Trail ({auditLogs.length} verified records)
               </span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950/70 text-emerald-300 border border-emerald-500/30">
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[rgb(var(--eios-surface-emerald-950))]/70 text-[rgb(var(--eios-text-emerald-300))] border border-emerald-500/30">
                 CHAIN INTEGRITY: VERIFIED ✓
               </span>
             </div>
 
-            <div className="overflow-x-auto rounded-xl border border-[#0d2e49] bg-[#021020]">
+            <div className="overflow-x-auto rounded-xl border border-[rgb(var(--eios-0d2e49))] bg-[rgb(var(--eios-021020))]">
               <table className="w-full text-left font-mono text-[11px]">
-                <thead className="border-b border-[#0d2e49] bg-[#010a16] text-[10px] uppercase text-slate-400">
+                <thead className="border-b border-[rgb(var(--eios-0d2e49))] bg-[rgb(var(--eios-010a16))] text-[10px] uppercase text-[rgb(var(--eios-text-slate-400))]">
                   <tr>
                     <th className="py-2.5 px-3">ID</th>
                     <th className="py-2.5 px-3">Timestamp</th>
@@ -584,27 +584,27 @@ export function SecurityCenterWindow({
                     <th className="py-2.5 px-3">SHA-256 Integrity Hash</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#0d2e49]">
+                <tbody className="divide-y divide-[rgb(var(--eios-0d2e49))]">
                   {auditLogs.map((log, idx) => (
-                    <tr key={log.entry_id || idx} className="hover:bg-[#03182b] transition-colors">
-                      <td className="py-2.5 px-3 font-semibold text-slate-300">
+                    <tr key={log.entry_id || idx} className="hover:bg-[rgb(var(--eios-03182b))] transition-colors">
+                      <td className="py-2.5 px-3 font-semibold text-[rgb(var(--eios-text-slate-300))]">
                         #{log.entry_id || idx + 1000}
                       </td>
-                      <td className="py-2.5 px-3 text-slate-400">
+                      <td className="py-2.5 px-3 text-[rgb(var(--eios-text-slate-400))]">
                         {new Date(log.at).toLocaleTimeString()}
                       </td>
-                      <td className="py-2.5 px-3 text-[#A7EBF2]">
+                      <td className="py-2.5 px-3 text-[rgb(var(--eios-a7ebf2))]">
                         {log.actor}
                       </td>
-                      <td className="py-2.5 px-3 font-medium text-slate-200">
+                      <td className="py-2.5 px-3 font-medium text-[rgb(var(--eios-text-slate-200))]">
                         {log.action}
                       </td>
-                      <td className="py-2.5 px-3 text-slate-400">
+                      <td className="py-2.5 px-3 text-[rgb(var(--eios-text-slate-400))]">
                         {log.ip || "127.0.0.1"}
                       </td>
                       <td className="py-2.5 px-3">
                         <span
-                          className="font-mono text-[10px] text-emerald-400 cursor-pointer hover:underline"
+                          className="font-mono text-[10px] text-[rgb(var(--eios-text-emerald-400))] cursor-pointer hover:underline"
                           title={log.integrity_hash}
                         >
                           {log.integrity_hash
@@ -623,12 +623,12 @@ export function SecurityCenterWindow({
         {/* ── TAB 4: REDACTOR SANDBOX ── */}
         {activeTab === "redactor" && (
           <div className="space-y-4">
-            <div className="rounded-xl border border-[#0d2e49] bg-[#021020] p-4">
-              <h3 className="font-display text-xs font-semibold text-slate-200 mb-1 flex items-center gap-2">
-                <Eye className="h-4 w-4 text-[#54ACBF]" />
+            <div className="rounded-xl border border-[rgb(var(--eios-0d2e49))] bg-[rgb(var(--eios-021020))] p-4">
+              <h3 className="font-display text-xs font-semibold text-[rgb(var(--eios-text-slate-200))] mb-1 flex items-center gap-2">
+                <Eye className="h-4 w-4 text-[rgb(var(--eios-54acbf))]" />
                 Interactive PII & Secrets Redaction Tester
               </h3>
-              <p className="text-xs text-slate-400 mb-4">
+              <p className="text-xs text-[rgb(var(--eios-text-slate-400))] mb-4">
                 Test how the EIOS security engine cleans incoming payloads and logs before they hit PostgreSQL or the AI analysis agent.
               </p>
 
@@ -636,7 +636,7 @@ export function SecurityCenterWindow({
                 {/* Input Payload */}
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="font-mono text-[11px] text-slate-300">
+                    <span className="font-mono text-[11px] text-[rgb(var(--eios-text-slate-300))]">
                       Raw Payload (with sensitive secrets)
                     </span>
                     <button
@@ -645,7 +645,7 @@ export function SecurityCenterWindow({
                           'curl -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiYWRtaW4ifQ.secret" https://api.eios.internal/query?api_key=sk-enterprise-9981-xyz&password=SuperSecretPassword123'
                         )
                       }
-                      className="text-[10px] font-mono text-[#54ACBF] hover:underline"
+                      className="text-[10px] font-mono text-[rgb(var(--eios-54acbf))] hover:underline"
                     >
                       Reset sample
                     </button>
@@ -654,7 +654,7 @@ export function SecurityCenterWindow({
                     value={testInput}
                     onChange={(e) => setTestInput(e.target.value)}
                     rows={6}
-                    className="w-full rounded-lg border border-[#0d2e49] bg-[#010914] p-2.5 font-mono text-xs text-rose-300 focus:border-[#26658C] focus:outline-none scrollbar-themed"
+                    className="w-full rounded-lg border border-[rgb(var(--eios-0d2e49))] bg-[rgb(var(--eios-010914))] p-2.5 font-mono text-xs text-[rgb(var(--eios-text-rose-300))] focus:border-[rgb(var(--eios-26658c))] focus:outline-none scrollbar-themed"
                     placeholder="Enter payload with API keys, tokens, or passwords..."
                   />
                 </div>
@@ -662,15 +662,15 @@ export function SecurityCenterWindow({
                 {/* Sanitized Output */}
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="font-mono text-[11px] text-emerald-400 flex items-center gap-1.5">
+                    <span className="font-mono text-[11px] text-[rgb(var(--eios-text-emerald-400))] flex items-center gap-1.5">
                       <ShieldCheck className="h-3.5 w-3.5" />
                       Sanitized Output (Safe for Logs & AI)
                     </span>
-                    <span className="text-[10px] font-mono text-slate-400">
+                    <span className="text-[10px] font-mono text-[rgb(var(--eios-text-slate-400))]">
                       Live Regex Engine
                     </span>
                   </div>
-                  <div className="min-h-[148px] rounded-lg border border-emerald-500/30 bg-[#010914] p-2.5 font-mono text-xs text-emerald-300 whitespace-pre-wrap break-all scrollbar-themed">
+                  <div className="min-h-[148px] rounded-lg border border-emerald-500/30 bg-[rgb(var(--eios-010914))] p-2.5 font-mono text-xs text-[rgb(var(--eios-text-emerald-300))] whitespace-pre-wrap break-all scrollbar-themed">
                     {redactedOutput}
                   </div>
                 </div>
@@ -682,16 +682,16 @@ export function SecurityCenterWindow({
         {/* ── TAB 5: API KEY & SECRETS ── */}
         {activeTab === "apikey" && (
           <div className="max-w-xl space-y-4">
-            <div className="rounded-xl border border-[#0d2e49] bg-[#021020] p-4">
+            <div className="rounded-xl border border-[rgb(var(--eios-0d2e49))] bg-[rgb(var(--eios-021020))] p-4">
               <div className="flex items-center gap-3 mb-3">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#02243d] border border-[#26658C]">
-                  <Key className="h-4 w-4 text-[#54ACBF]" />
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[rgb(var(--eios-02243d))] border border-[rgb(var(--eios-26658c))]">
+                  <Key className="h-4 w-4 text-[rgb(var(--eios-54acbf))]" />
                 </div>
                 <div>
-                  <h3 className="font-display text-xs font-bold text-slate-100">
+                  <h3 className="font-display text-xs font-bold text-[rgb(var(--eios-text-slate-100))]">
                     EIOS Master API Key Authentication
                   </h3>
-                  <p className="text-[11px] text-slate-400">
+                  <p className="text-[11px] text-[rgb(var(--eios-text-slate-400))]">
                     Used to authenticate all requests against protected orchestrator and ingest endpoints.
                   </p>
                 </div>
@@ -699,7 +699,7 @@ export function SecurityCenterWindow({
 
               <div className="space-y-3">
                 <div>
-                  <label className="block text-[11px] font-mono text-slate-300 mb-1.5">
+                  <label className="block text-[11px] font-mono text-[rgb(var(--eios-text-slate-300))] mb-1.5">
                     Active Session API Key (Stored in sessionStorage)
                   </label>
                   <div className="flex gap-2">
@@ -708,11 +708,11 @@ export function SecurityCenterWindow({
                       value={inputKey}
                       onChange={(e) => setInputKey(e.target.value)}
                       placeholder="eios_key_..."
-                      className="flex-1 rounded-lg border border-[#0d2e49] bg-[#010914] px-3 py-2 font-mono text-xs text-slate-100 focus:border-[#26658C] focus:outline-none"
+                      className="flex-1 rounded-lg border border-[rgb(var(--eios-0d2e49))] bg-[rgb(var(--eios-010914))] px-3 py-2 font-mono text-xs text-[rgb(var(--eios-text-slate-100))] focus:border-[rgb(var(--eios-26658c))] focus:outline-none"
                     />
                     <button
                       onClick={handleSaveApiKey}
-                      className="flex items-center gap-1.5 rounded-lg bg-[#02243d] hover:bg-[#033457] border border-[#26658C] px-4 py-2 font-display text-xs font-semibold text-[#A7EBF2] transition-colors"
+                      className="flex items-center gap-1.5 rounded-lg bg-[rgb(var(--eios-02243d))] hover:bg-[rgb(var(--eios-033457))] border border-[rgb(var(--eios-26658c))] px-4 py-2 font-display text-xs font-semibold text-[rgb(var(--eios-a7ebf2))] transition-colors"
                     >
                       <Check className="h-3.5 w-3.5" />
                       Save Key
@@ -721,13 +721,13 @@ export function SecurityCenterWindow({
                 </div>
 
                 {keySavedMessage && (
-                  <div className="flex items-center gap-2 rounded-lg bg-emerald-950/60 border border-emerald-500/40 p-2.5 text-xs text-emerald-300">
+                  <div className="flex items-center gap-2 rounded-lg bg-[rgb(var(--eios-surface-emerald-950))]/60 border border-emerald-500/40 p-2.5 text-xs text-[rgb(var(--eios-text-emerald-300))]">
                     <Check className="h-3.5 w-3.5" />
                     <span>API Key saved to active session. Endpoints will now attach X-API-Key header.</span>
                   </div>
                 )}
 
-                <div className="pt-2 border-t border-[#0d2e49]/60 flex items-center justify-between text-[11px] text-slate-400">
+                <div className="pt-2 border-t border-[rgb(var(--eios-0d2e49))]/60 flex items-center justify-between text-[11px] text-[rgb(var(--eios-text-slate-400))]">
                   <span>Current Key Status: <strong>{apiKey ? "Configured" : "Not Set (Anonymous)"}</strong></span>
                   {apiKey && (
                     <button
@@ -736,7 +736,7 @@ export function SecurityCenterWindow({
                         clearApiKey();
                         sessionStorage.removeItem("eios_api_key");
                       }}
-                      className="text-rose-400 hover:underline"
+                      className="text-[rgb(var(--eios-text-rose-400))] hover:underline"
                     >
                       Clear Key
                     </button>
@@ -749,7 +749,7 @@ export function SecurityCenterWindow({
       </div>
 
       {/* 4. Window Footer Status Bar */}
-      <div className="flex h-8 items-center justify-between border-t border-[#0d2e49] bg-[#010914] px-4 text-[10px] font-mono text-slate-400">
+      <div className="flex h-8 items-center justify-between border-t border-[rgb(var(--eios-0d2e49))] bg-[rgb(var(--eios-010914))] px-4 text-[10px] font-mono text-[rgb(var(--eios-text-slate-400))]">
         <div className="flex items-center gap-3">
           <span className="flex items-center gap-1.5">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />

@@ -482,7 +482,7 @@ export function DesktopIcons({ activeWindows, onToggleWindow }: DesktopIconsProp
   ];
 
   return (
-    <aside className="relative z-20 flex w-[90px] flex-col items-center gap-1.5 py-2.5 select-none overflow-y-auto scrollbar-themed border-r border-[#0d2e49]/60 bg-[#010610]/70">
+    <aside className="relative z-20 flex w-[90px] flex-col items-center gap-1.5 py-2.5 select-none overflow-y-auto scrollbar-themed border-r border-[rgb(var(--eios-0d2e49))]/60 bg-[rgb(var(--eios-010610))]/70">
       {icons.map((item) => {
         const isOpen = activeWindows[item.id];
 
@@ -490,8 +490,8 @@ export function DesktopIcons({ activeWindows, onToggleWindow }: DesktopIconsProp
           <button
             key={item.id}
             onClick={() => onToggleWindow(item.id)}
-            className={`group relative flex w-[82px] flex-col items-center rounded-xl p-1.5 transition-all duration-150 hover:bg-[#021f36]/60 active:scale-95 ${
-              isOpen ? "bg-[#02243d]/80 border border-[#26658C]" : "border border-transparent"
+            className={`group relative flex w-[82px] flex-col items-center rounded-xl p-1.5 transition-all duration-150 hover:bg-[rgb(var(--eios-021f36))]/60 active:scale-95 ${
+              isOpen ? "bg-[rgb(var(--eios-02243d))]/80 border border-[rgb(var(--eios-26658c))]" : "border border-transparent"
             }`}
           >
             {/* Realistic Solid Icon Canvas */}
@@ -500,13 +500,13 @@ export function DesktopIcons({ activeWindows, onToggleWindow }: DesktopIconsProp
             </div>
 
             {/* Label below icon with high contrast crisp typography */}
-            <span className="mt-1 w-full text-center font-display text-[9px] font-semibold text-slate-200 leading-tight group-hover:text-[#A7EBF2]">
+            <span className="mt-1 w-full text-center font-display text-[9px] font-semibold text-[rgb(var(--eios-text-slate-200))] leading-tight group-hover:text-[rgb(var(--eios-a7ebf2))]">
               {item.label}
             </span>
 
             {/* Active window indicator pill (Clean solid dot, zero neon glow) */}
             {isOpen && (
-              <span className="absolute bottom-0.5 h-1 w-3 rounded-full bg-[#54ACBF]" />
+              <span className="absolute bottom-0.5 h-1 w-3 rounded-full bg-[rgb(var(--eios-54acbf))]" />
             )}
           </button>
         );

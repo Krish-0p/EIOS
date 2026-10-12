@@ -50,12 +50,12 @@ export function EIOSBootScreen({ onBootComplete }: EIOSBootScreenProps) {
   }, [bootLogs.length]);
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col justify-between bg-[#01040a] text-slate-200 font-mono select-none p-6 sm:p-10">
+    <div className="fixed inset-0 z-50 flex flex-col justify-between bg-[rgb(var(--eios-01040a))] text-[rgb(var(--eios-text-slate-200))] font-mono select-none p-6 sm:p-10">
       {/* Top OS Branding Bar */}
-      <div className="flex items-center justify-between border-b border-[#0d2e49]/70 pb-4">
+      <div className="flex items-center justify-between border-b border-[rgb(var(--eios-0d2e49))]/70 pb-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#02243d] border border-[#26658C] shadow-lg">
-            <svg viewBox="0 0 24 24" className="h-5 w-5 text-[#54ACBF]" fill="currentColor">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[rgb(var(--eios-02243d))] border border-[rgb(var(--eios-26658c))] shadow-lg">
+            <svg viewBox="0 0 24 24" className="h-5 w-5 text-[rgb(var(--eios-54acbf))]" fill="currentColor">
               <polygon
                 points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5"
                 fill="none"
@@ -66,10 +66,10 @@ export function EIOSBootScreen({ onBootComplete }: EIOSBootScreenProps) {
             </svg>
           </div>
           <div>
-            <h1 className="font-display text-base font-bold tracking-wider text-white">
+            <h1 className="font-display text-base font-bold tracking-wider text-[rgb(var(--eios-text-white))]">
               EIOS BOOTLOADER
             </h1>
-            <span className="text-[11px] text-[#54ACBF] tracking-wide">
+            <span className="text-[11px] text-[rgb(var(--eios-54acbf))] tracking-wide">
               Enterprise Intelligent Operating System • Kernel 1.0.0
             </span>
           </div>
@@ -78,7 +78,7 @@ export function EIOSBootScreen({ onBootComplete }: EIOSBootScreenProps) {
         <div className="flex items-center gap-2">
           <button
             onClick={onBootComplete}
-            className="flex items-center gap-1.5 rounded-lg border border-[#26658C] bg-[#02243d] px-3 py-1.5 text-xs text-[#A7EBF2] hover:bg-[#033457] transition-colors"
+            className="flex items-center gap-1.5 rounded-lg border border-[rgb(var(--eios-26658c))] bg-[rgb(var(--eios-02243d))] px-3 py-1.5 text-xs text-[rgb(var(--eios-a7ebf2))] hover:bg-[rgb(var(--eios-033457))] transition-colors"
           >
             <span>Fast Boot</span>
             <ChevronRight className="h-3.5 w-3.5" />
@@ -91,12 +91,12 @@ export function EIOSBootScreen({ onBootComplete }: EIOSBootScreenProps) {
         <div className="flex items-center justify-center mb-6">
           <div className="relative flex flex-col items-center">
             {/* Medallion */}
-            <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-b from-[#124164] to-[#041a2e] border-2 border-[#54ACBF] shadow-[0_0_40px_rgba(38,101,140,0.3)]">
-              <span className="font-display text-2xl font-black text-[#A7EBF2] tracking-widest">
+            <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-b from-[rgb(var(--eios-124164))] to-[rgb(var(--eios-041a2e))] border-2 border-[rgb(var(--eios-54acbf))] shadow-[0_0_40px_rgba(38,101,140,0.3)]">
+              <span className="font-display text-2xl font-black text-[rgb(var(--eios-a7ebf2))] tracking-widest">
                 EIOS
               </span>
             </div>
-            <div className="mt-3 flex items-center gap-2 text-xs font-mono text-slate-400">
+            <div className="mt-3 flex items-center gap-2 text-xs font-mono text-[rgb(var(--eios-text-slate-400))]">
               <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
               <span>SUPERVISOR KERNEL ACTIVE</span>
             </div>
@@ -104,19 +104,19 @@ export function EIOSBootScreen({ onBootComplete }: EIOSBootScreenProps) {
         </div>
 
         {/* Boot Terminal Output Window */}
-        <div className="rounded-xl border border-[#0d2e49] bg-[#010914] p-4 shadow-2xl h-60 overflow-y-auto scrollbar-themed flex flex-col justify-end">
+        <div className="rounded-xl border border-[rgb(var(--eios-0d2e49))] bg-[rgb(var(--eios-010914))] p-4 shadow-2xl h-60 overflow-y-auto scrollbar-themed flex flex-col justify-end">
           <div className="space-y-1.5 text-xs">
             {bootLogs.slice(0, currentStep + 1).map((log, idx) => (
               <div key={idx} className="flex items-start gap-2.5">
-                <span className="text-[#54ACBF] shrink-0 font-bold">
+                <span className="text-[rgb(var(--eios-54acbf))] shrink-0 font-bold">
                   [{((idx * 0.28) + 0.04).toFixed(6)}]
                 </span>
-                <span className={idx === currentStep ? "text-emerald-300 font-semibold" : "text-slate-300"}>
+                <span className={idx === currentStep ? "text-[rgb(var(--eios-text-emerald-300))] font-semibold" : "text-[rgb(var(--eios-text-slate-300))]"}>
                   {log.text}
                 </span>
               </div>
             ))}
-            <div className="flex items-center gap-1 text-emerald-400 animate-pulse pt-1">
+            <div className="flex items-center gap-1 text-[rgb(var(--eios-text-emerald-400))] animate-pulse pt-1">
               <span>_</span>
             </div>
           </div>
@@ -124,13 +124,13 @@ export function EIOSBootScreen({ onBootComplete }: EIOSBootScreenProps) {
 
         {/* Progress Metric Bar */}
         <div className="space-y-2">
-          <div className="flex items-center justify-between text-xs text-slate-400 font-mono">
+          <div className="flex items-center justify-between text-xs text-[rgb(var(--eios-text-slate-400))] font-mono">
             <span>KERNEL INITIALIZATION STATUS</span>
-            <span className="text-[#A7EBF2] font-bold">{progress}%</span>
+            <span className="text-[rgb(var(--eios-a7ebf2))] font-bold">{progress}%</span>
           </div>
-          <div className="h-2 w-full overflow-hidden rounded-full bg-[#021324] border border-[#0d2e49]">
+          <div className="h-2 w-full overflow-hidden rounded-full bg-[rgb(var(--eios-021324))] border border-[rgb(var(--eios-0d2e49))]">
             <div
-              className="h-full bg-gradient-to-r from-[#26658C] via-[#54ACBF] to-[#A7EBF2] rounded-full transition-all duration-75"
+              className="h-full bg-gradient-to-r from-[rgb(var(--eios-26658c))] via-[rgb(var(--eios-54acbf))] to-[rgb(var(--eios-a7ebf2))] rounded-full transition-all duration-75"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -138,23 +138,23 @@ export function EIOSBootScreen({ onBootComplete }: EIOSBootScreenProps) {
       </div>
 
       {/* Footer Diagnostic Chips */}
-      <div className="flex flex-wrap items-center justify-between border-t border-[#0d2e49]/70 pt-4 text-xs text-slate-400">
+      <div className="flex flex-wrap items-center justify-between border-t border-[rgb(var(--eios-0d2e49))]/70 pt-4 text-xs text-[rgb(var(--eios-text-slate-400))]">
         <div className="flex items-center gap-4">
           <span className="flex items-center gap-1.5">
-            <Cpu className="h-3.5 w-3.5 text-[#54ACBF]" />
+            <Cpu className="h-3.5 w-3.5 text-[rgb(var(--eios-54acbf))]" />
             Host: Windows 11 WSL2
           </span>
           <span className="flex items-center gap-1.5">
-            <HardDrive className="h-3.5 w-3.5 text-[#54ACBF]" />
+            <HardDrive className="h-3.5 w-3.5 text-[rgb(var(--eios-54acbf))]" />
             Cap: 3.8GB Eco-Guard
           </span>
           <span className="flex items-center gap-1.5">
-            <Shield className="h-3.5 w-3.5 text-emerald-400" />
+            <Shield className="h-3.5 w-3.5 text-[rgb(var(--eios-text-emerald-400))]" />
             Zero-Trust Mesh
           </span>
         </div>
 
-        <div className="text-[11px] text-slate-400">
+        <div className="text-[11px] text-[rgb(var(--eios-text-slate-400))]">
           Press any key or click Fast Boot to proceed
         </div>
       </div>

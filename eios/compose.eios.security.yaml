@@ -54,6 +54,17 @@ services:
           memory: 250M
           cpus: "0.50"
 
+  eios-intelligence:
+    environment:
+      - EIOS_POSTGRES_DSN=postgresql://eios:${EIOS_POSTGRES_PASSWORD}@eios-postgres:5432/eios
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    read_only: true
+    tmpfs:
+      - /tmp:mode=1777,size=32m
+
   eios-orchestrator:
     environment:
       - EIOS_POSTGRES_DSN=postgresql://eios:${EIOS_POSTGRES_PASSWORD}@eios-postgres:5432/eios
